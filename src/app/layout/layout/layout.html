@@ -1,0 +1,44 @@
+<div class="app-layout">
+  <div>
+    <div class="all-items-layout">
+      <div class="line-layout-top"></div>
+      <div class="items-layout top">
+        @for (item of items; track $index) {
+        <div class="block-container">
+          <div class="block"></div>
+          <div class="points-container reverse">
+            <div class="points"></div>
+            <div class="points"></div>
+            <div class="points"></div>
+          </div>
+          <div class="block"></div>
+        </div>
+        }
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+
+    <div class="help-menu">
+      <div>
+        hola necesitas ayuda
+      </div>
+    </div>
+
+    <div class="all-items-layout">
+      <div class="line-layout-bottom"></div>
+      <div class="items-layout bottom">
+        @for (item of items; track $index) {
+        <div class="block-container">
+          <div class="block"></div>
+          <div class="points-container reverse">
+            <div class="points"></div>
+            <div class="points"></div>
+            <div class="points"></div>
+          </div>
+          <div class="block"></div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

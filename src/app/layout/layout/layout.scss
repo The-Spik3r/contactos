@@ -1,0 +1,150 @@
+.app-layout {
+  height: 100vh;
+  display: flex;
+  position: relative;
+  padding-top: 20px; // espacio para la línea superior
+  padding-bottom: 50px; // espacio para la línea inferior
+  box-shadow: inset 100% 0 15px -10px rgba(0, 0, 0, 0.1), inset 0 100% 15px -10px rgba(0, 0, 0, 0.1);
+}
+
+.line-layout-bottom {
+  padding: 2px;
+  width: 100%;
+  position: fixed;
+  bottom: 10;
+  margin-bottom: 10px;
+  background-color: var(--secondary-color);
+  z-index: 2;
+}
+
+.items-layout.bottom {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  bottom: -9px; // justo encima de la línea inferior
+  width: 100%;
+  z-index: 1;
+}
+
+.line-layout-top {
+  margin-top: 10px;
+  padding: 2px;
+  width: 100%;
+  position: fixed;
+  top: 15;
+  background-color: var(--secondary-color);
+  z-index: 2;
+}
+
+.items-layout.top {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  top: -17px; // justo debajo de la línea superior
+  width: 100%;
+  z-index: 1;
+}
+
+.items-layout {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.block {
+  width: 10px;
+  background-color: var(--secondary-color);
+  height: 5px;
+}
+.block-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.points-container {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  grid-template-rows: repeat(5, auto);
+  gap: 4px;
+
+  // Isosceles triangle: points centered in each row
+  .points {
+    // Row 1: center
+    &:nth-child(1) {
+      grid-row: 1;
+      grid-column: 3;
+    }
+    // Row 2: center two
+    &:nth-child(2) {
+      grid-row: 2;
+      grid-column: 2;
+    }
+    &:nth-child(3) {
+      grid-row: 2;
+      grid-column: 4;
+    }
+    // Row 3: center three
+    &:nth-child(4) {
+      grid-row: 3;
+      grid-column: 1;
+    }
+    &:nth-child(5) {
+      grid-row: 3;
+      grid-column: 3;
+    }
+    &:nth-child(6) {
+      grid-row: 3;
+      grid-column: 5;
+    }
+    // Row 4: four points
+    &:nth-child(7) {
+      grid-row: 4;
+      grid-column: 1;
+    }
+    &:nth-child(8) {
+      grid-row: 4;
+      grid-column: 2;
+    }
+    &:nth-child(9) {
+      grid-row: 4;
+      grid-column: 4;
+    }
+    &:nth-child(10) {
+      grid-row: 4;
+      grid-column: 5;
+    }
+    // Row 5: all columns
+    &:nth-child(11) {
+      grid-row: 5;
+      grid-column: 1;
+    }
+    &:nth-child(12) {
+      grid-row: 5;
+      grid-column: 2;
+    }
+    &:nth-child(13) {
+      grid-row: 5;
+      grid-column: 3;
+    }
+    &:nth-child(14) {
+      grid-row: 5;
+      grid-column: 4;
+    }
+    &:nth-child(15) {
+      grid-row: 5;
+      grid-column: 5;
+    }
+  }
+}
+.reverse {
+  transform: rotate(180deg);
+}
+.points {
+  width: 5px;
+  height: 5px;
+  background-color: var(--secondary-color);
+  border-radius: 100%;
+}

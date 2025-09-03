@@ -1,1 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Reset CSS para eliminar espacios en blanco por defecto
+
+:root {
+  --primary-color: #cdc8b0;
+  --secondary-color: #4e4b42;
+  --third-color: #dad4bb;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-y: hidden;
+}
+
+html,
+body {
+  height: 100%;
+  @font-face {
+    font-family: 'ITC Benguiat';
+    src: url('./../public/ITC\ Benguiat\ Book\ Regular.otf') format('OpenType');
+  }
+  font-family: 'ITC Benguiat', serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+h1 {
+  font-weight: unset;
+}
+
+body {
+  background-color: var(--primary-color);
+}
+
+.error-message {
+  color: red;
+}
+
+.btn-primary {
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+}
