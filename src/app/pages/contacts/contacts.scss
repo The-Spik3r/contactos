@@ -18,9 +18,15 @@
 }
 
 .contacts-list{
-  height: 50%;
+  height: 75%;
   width: 60%;
   border-bottom: 1px solid var(--secondary-color);
   border-right: 1px solid var(--secondary-color);
   background-color: var(--third-color);
+}
+
+.contact-line{
+  margin-right: 5px;
+  height: 98%;
+  border-right: 2px solid var(--fourth-color);
 }
