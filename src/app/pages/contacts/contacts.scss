@@ -9,8 +9,18 @@
   margin-top: 40px;
   margin-bottom: 40px;
 }
+
+
 .contacts-header{
   text-align: start;
   font-size: 30px;
   text-shadow: 5px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.contacts-list{
+  height: 50%;
+  width: 60%;
+  border-bottom: 1px solid var(--secondary-color);
+  border-right: 1px solid var(--secondary-color);
+  background-color: var(--third-color);
 }

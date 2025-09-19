@@ -5,10 +5,21 @@ import { Injectable } from '@angular/core';
 })
 export class Auth {
   isloggedin: boolean = false;
+  token: null | string = localStorage.getItem('token');
 
-  signIn(email: string, password: string) {
-    if (email.includes('@') && password.length > 6) {
+  async signIn(email: string, password: string) {
+    const { ok, text } = await fetch('https://agenda-api.somee.com/api/authentication/authenticate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (ok) {
       this.isloggedin = true;
+      this.token = await text();
+      localStorage.setItem('token', this.token);
     } else {
       this.isloggedin = false;
     }
@@ -16,6 +27,7 @@ export class Auth {
 
   signOut() {
     this.isloggedin = false;
-    
+    localStorage.removeItem('token');
+    this.token = null;
   }
 }
