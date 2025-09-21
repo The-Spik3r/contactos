@@ -1,107 +1,323 @@
 // Reset para eliminar espacios en blanco
 :host {
+  font-family: Arial, Helvetica, sans-serif;
   display: block;
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
+  background-color: #181510;
+  background-image: linear-gradient(90deg, #000000 1px, hsla(51, 21%, 75%, 0) 0),
+    linear-gradient(180deg, #000000 1px, hsla(51, 21%, 75%, 0) 0);
+  background-size: 0.3rem 0.3rem;
+  animation: subtleFlicker 1s infinite linear;
+  overflow: hidden;
+
+  // Efecto de líneas de escaneado CRT (sutil)
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.01) 2px,
+      rgba(255, 255, 255, 0.01) 4px
+    );
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  // Efecto de curvatura de monitor CRT (sombra interior)
+  &::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.2) 100%);
+    pointer-events: none;
+    z-index: 999;
+  }
+}
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+.title {
+  display: flex;
+  align-items: end;
+  color: white;
+
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.5), 0 0 6px rgba(255, 255, 255, 0.3);
+
+  h1 {
+    font-size: 5rem;
+    padding: 0;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.6), 0 0 10px rgba(255, 255, 255, 0.4),
+      0 0 15px rgba(255, 255, 255, 0.2);
+    animation: flipGlitch 8s infinite;
+  }
+
+  h2 {
+    font-size: 2rem;
+    padding-left: 1rem;
+    padding-bottom: 0.5rem;
+    font-weight: lighter;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.4), 0 0 6px rgba(255, 255, 255, 0.2);
+    animation: flipGlitchSubtle 10s infinite;
+  }
+}
+.messages-boots {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 6rem;
+  color: white;
+
+  p {
+    font-size: 1.2rem;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.4), 0 0 6px rgba(255, 255, 255, 0.2);
+    font-family: 'Courier New', monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid rgba(255, 255, 255, 0.7);
+    animation: typewriter 1.5s steps(40, end) forwards, blink-cursor 1s infinite;
+    width: 0;
+    max-width: none;
+    text-overflow: clip;
+
+    &.typed {
+      border-right: none;
+      width: auto;
+      animation: none;
+      max-width: 100%;
+    }
+  }
+}
+.messages-error {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 2rem;
+  padding-left: 6rem;
+  color: red;
+
+  p {
+    font-size: 1.2rem;
+    text-shadow: 0 0 3px rgba(255, 0, 0, 0.4), 0 0 6px rgba(255, 0, 0, 0.2);
+    font-family: 'Courier New', monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid rgba(255, 0, 0, 0.7);
+    animation: typewriter 1.5s steps(40, end) forwards, blink-cursor 1s infinite;
+    width: 0;
+    max-width: none;
+    text-overflow: clip;
+
+    &.typed {
+      border-right: none;
+      width: auto;
+      animation: none;
+      max-width: 100%;
+    }
+  }
+}
+.input-none-border {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: white;
+  font-size: 1.2rem;
+  font-family: 'Courier New', monospace;
+  width: 300px;
+
+  padding: 0.5rem 0;
+  margin-top: 1rem;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+  }
+
+  &:focus {
+    border-bottom: 2px solid rgba(255, 255, 255, 1);
+  }
 }
 
-.login-container {
+// Estilos para el nuevo flujo tipo terminal
+.terminal-input-container {
   display: flex;
-  justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  width: 100vw;
+  margin: 1rem 0;
+  font-family: 'Courier New', monospace;
+  color: white;
 
-  margin: 0;
-  box-sizing: border-box;
-  .login-card {
-    background-color: var(--third-color);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    // padding: 40px;
+  .terminal-prompt {
+    font-size: 1.2rem;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.4), 0 0 6px rgba(255, 255, 255, 0.2);
+    margin-right: 0.5rem;
+    min-width: fit-content;
+  }
+
+  .terminal-input {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: white;
+    font-size: 1.2rem;
+    font-family: 'Courier New', monospace;
+    flex: 1;
+    border-right: 2px solid rgba(255, 255, 255, 0.7);
+    animation: blink-cursor 1s infinite;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+      font-style: italic;
+    }
+
+    &:focus {
+      border-right: 2px solid rgba(255, 255, 255, 1);
+    }
+  }
+}
+
+.terminal-history {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+  font-family: 'Courier New', monospace;
+  color: white;
+
+  .terminal-prompt {
+    font-size: 1.2rem;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.4), 0 0 6px rgba(255, 255, 255, 0.2);
+    margin-right: 0.5rem;
+  }
+
+  .terminal-value {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.3);
+  }
+}
+
+.terminal-processing {
+  margin: 1rem 0;
+  font-family: 'Courier New', monospace;
+  color: yellow;
+
+  p {
+    font-size: 1.2rem;
+    text-shadow: 0 0 3px rgba(255, 255, 0, 0.4), 0 0 6px rgba(255, 255, 0, 0.2);
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid rgba(255, 255, 0, 0.7);
+    animation: typewriter 1.5s steps(40, end) forwards, blink-cursor 1s infinite;
+    width: 0;
+    max-width: none;
+    text-overflow: clip;
+
+    &.typed {
+      border-right: none;
+      width: auto;
+      animation: none;
+      max-width: 100%;
+    }
+  }
+}
+
+.terminal-error {
+  margin: 1rem 0;
+  font-family: 'Courier New', monospace;
+
+  p {
+    font-size: 1.2rem;
+    color: red;
+    text-shadow: 0 0 3px rgba(255, 0, 0, 0.4), 0 0 6px rgba(255, 0, 0, 0.2);
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid rgba(255, 0, 0, 0.7);
+    animation: typewriter 1.5s steps(40, end) forwards, blink-cursor 1s infinite;
+    width: 0;
+    max-width: none;
+    text-overflow: clip;
+
+    &.typed {
+      border-right: none;
+      width: auto;
+      animation: none;
+      max-width: 100%;
+    }
+  }
+}
+// Animación sutil de parpadeo para simular monitor CRT
+@keyframes subtleFlicker {
+  0%,
+  98% {
+    opacity: 1;
+  }
+  99% {
+    opacity: 0.99;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+// Animaciones de volteo (glitch tetrico/instantáneo)
+@keyframes flipGlitch {
+  0%,
+  94.9%,
+  95.2%,
+  100% {
+    transform: rotate(0deg);
+  }
+  95.0%,
+  95.1% {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes flipGlitchSubtle {
+  0%,
+  96.8%,
+  97.1%,
+  100% {
+    transform: rotate(0deg);
+  }
+  96.9%,
+  97.0% {
+    transform: rotate(180deg);
+  }
+}
+
+// Animaciones de máquina de escribir
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
     width: 100%;
-    max-width: 500px;
-    height: 500px;
-    h2 {
-      padding-top: 10px;
-      padding-bottom: 10px;
-      padding-left: 20px;
-      padding-right: 20px;
-      text-align: start;
-      // margin-bottom: 30px;
-      font-size: 28px;
-      font-weight: 600;
-    }
-    .login-header {
-      background-color: var(--secondary-color);
-      h2 {
-        color: var(--primary-color);
-      }
-    }
+  }
+}
 
-    .login-form {
-      display: flex;
-      height: 80%;
-      flex-direction: column;
-      justify-content: center;
-      padding-left: 20px;
-      padding-right: 20px;
-      .form-group {
-        margin-bottom: 25px;
-
-        label {
-          display: block;
-          margin-bottom: 8px;
-          color: #555;
-          font-weight: 500;
-          font-size: 14px;
-        }
-
-        input {
-          width: 100%;
-          background-color: #b2ad98;
-          padding: 12px 16px;
-          border: 2px solid #b2ad98;
-          border-radius: 8px;
-          font-size: 16px;
-          transition: all 0.3s ease;
-          box-sizing: border-box;
-
-          &:focus {
-            outline: none;
-            border-color: #222325;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-          }
-
-          &::placeholder {
-            color: black;
-          }
-        }
-      }
-
-      .login-button {
-        background-color: transparent;
-        width: 100%;
-        padding: 14px;
-        border: none;
-        border-radius: 8px;
-        color: #333;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border: 1px solid var(--secondary-color);
-
-        &:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 10px 25px var(--secondary-color);
-        }
-
-        &:active {
-          transform: translateY(0);
-        }
-      }
-    }
+@keyframes blink-cursor {
+  0%,
+  51%,
+  100% {
+    border-color: transparent;
   }
 }

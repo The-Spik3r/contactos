@@ -6,25 +6,26 @@ import { Create } from './pages/create/create';
 export const routes: Routes = [
   {
     path: '',
-    component:Layout,
+    component: Layout,
     children: [
       {
         path: '',
         redirectTo: 'login',
         pathMatch: 'full',
       },
+
       {
-        path: 'login',
-        component: Login,
-      },
-      {
-        path:'contacts',
+        path: 'contacts',
         component: Contacts,
       },
       {
         path: 'create',
         component: Create,
-      }
+      },
     ],
+  },
+  {
+    path: 'login',
+    component: Login,
   },
 ];

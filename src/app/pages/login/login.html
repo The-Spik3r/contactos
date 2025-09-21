@@ -1,43 +1,107 @@
 <main class="login-container">
-  <div class="login-card">
-    <div class="login-header">
-      <h2>Iniciar Sesión</h2>
+  <div class="title-container">
+    <div class="title">
+      <h1>LOADING</h1>
+      <h2>- BOOTING SYSTEM...</h2>
     </div>
-    <form
-      class="login-form"
-      #loginForm="ngForm"
-      (submit)="loginSubmit(email.value, password.value); $event.preventDefault()"
-    >
-      <div class="form-group">
-        <label for="email">Correo Electrónico</label>
-        <input
-          type="email"
-          id="email"
-          #email
-          name="email"
-          required
-          placeholder="Ingresa tu correo electrónico"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="password">Contraseña</label>
-        <input
-          type="password"
-          id="password"
-          #password
-          name="password"
-          required
-          placeholder="Ingresa tu contraseña"
-        />
-      </div>
-
-      <button type="submit" class="login-button">Iniciar Sesión</button>
-    </form>
     <div>
-      <span class="error-message">
-        {{ isError ? 'Error en las credenciales' : '' }}
-      </span>
+      <app-loader></app-loader>
     </div>
   </div>
+  @if (!gonnaLogin) {
+  <div id="messages-container">
+    <div class="messages-boots">
+      @for (item of messageSeems; track $index) {
+      <p>{{ item }}</p>
+      }
+    </div>
+    <div class="messages-error">
+      @for (item of messageErrorSeems; track $index) {
+      <p class="error">{{ item }}</p>
+      }
+    </div>
+  </div>
+  } @if (gonnaLogin) {
+  <div class="messages-boots">
+    <p>Please enter your credentials</p>
+
+    <!-- Mostrar prompt de email -->
+    @if (loginStep === 'email') {
+    <div class="terminal-input-container">
+      <span class="terminal-prompt">Email: </span>
+      <input
+        type="email"
+        #emailInput
+        [(ngModel)]="email"
+        (keydown.enter)="onEmailSubmit()"
+        class="terminal-input"
+        placeholder="user@example.com"
+        autofocus
+      />
+    </div>
+    }
+
+    <!-- Mostrar email confirmado y prompt de password -->
+    @if (loginStep === 'password') {
+    <div class="terminal-history">
+      <span class="terminal-prompt">Email: </span>
+      <span class="terminal-value">{{ email }}</span>
+    </div>
+    <div class="terminal-input-container">
+      <span class="terminal-prompt">Password: </span>
+      <input
+        type="password"
+        #passwordInput
+        [(ngModel)]="password"
+        (keydown.enter)="onPasswordSubmit()"
+        class="terminal-input"
+        placeholder="••••••••"
+        autofocus
+      />
+    </div>
+    }
+
+    <!-- Mostrar ambos valores y procesar login -->
+    @if (loginStep === 'processing') {
+    <div class="terminal-history">
+      <span class="terminal-prompt">Email: </span>
+      <span class="terminal-value">{{ email }}</span>
+    </div>
+    <div class="terminal-history">
+      <span class="terminal-prompt">Password: </span>
+      <span class="terminal-value">••••••••</span>
+    </div>
+    <div class="terminal-processing">
+      <p>Authenticating...</p>
+    </div>
+    }
+
+    <!-- Mostrar error si falla la autenticación -->
+    @if (loginStep === 'error') {
+    <div class="terminal-history">
+      <span class="terminal-prompt">Email: </span>
+      <span class="terminal-value">{{ email }}</span>
+    </div>
+    <div class="terminal-history">
+      <span class="terminal-prompt">Password: </span>
+      <span class="terminal-value">••••••••</span>
+    </div>
+    <div class="terminal-error">
+      <p class="error">Authentication failed. Please try again.</p>
+    </div>
+    <div class="terminal-input-container">
+      <span class="terminal-prompt">Email: </span>
+      <input
+        type="email"
+        #emailInputRetry
+        [(ngModel)]="email"
+        (keydown.enter)="onEmailSubmit()"
+        class="terminal-input"
+        placeholder="user@example.com"
+        autofocus
+      />
+    </div>
+    }
+  </div>
+  }
 </main>

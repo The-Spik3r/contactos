@@ -1,5 +1,7 @@
 .contacts-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   height: 86vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -8,25 +10,57 @@
   padding: 20px;
   margin-top: 40px;
   margin-bottom: 40px;
+  color: var(--text-color);
 }
 
-
-.contacts-header{
+.contacts-header {
   text-align: start;
   font-size: 30px;
   text-shadow: 5px 5px 0px rgba(0, 0, 0, 0.2);
 }
 
-.contacts-list{
+.contacts-body {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  gap: 20px;
+  position: relative;
+}
+.contacts-list {
   height: 75%;
-  width: 60%;
+  width: 30%;
   border-bottom: 1px solid var(--secondary-color);
   border-right: 1px solid var(--secondary-color);
   background-color: var(--third-color);
 }
-
-.contact-line{
-  margin-right: 5px;
-  height: 98%;
-  border-right: 2px solid var(--fourth-color);
+.scroll-container {
+  width: 40px;
+  height: 75%;
+  display: flex;
+  gap: 10px;
+}
+.contact-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px;
+}
+.scroll-bar {
+  height: 100%;
+  width: 15px;
+  background-color: var(--five-color);
+}
+.contact-icon{
+  margin-left: -60px;
+  position: absolute;
+}
+.contact-icon img{
+  height: 40px;
+  width: 60px;
+  border-radius: 50%;
+}
+.scroll-secondary {
+  height: 100%;
+  width: 3px;
+  background-color: var(--five-color);
 }

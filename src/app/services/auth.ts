@@ -8,7 +8,7 @@ export class Auth {
   token: null | string = localStorage.getItem('token');
 
   async signIn(email: string, password: string) {
-    const { ok, text } = await fetch('https://agenda-api.somee.com/api/authentication/authenticate', {
+    const res = await fetch('https://agenda-api.somee.com/api/authentication/authenticate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -16,9 +16,9 @@ export class Auth {
       body: JSON.stringify({ email, password }),
     });
 
-    if (ok) {
+    if (res.ok) {
       this.isloggedin = true;
-      this.token = await text();
+      this.token = await res.text();
       localStorage.setItem('token', this.token);
     } else {
       this.isloggedin = false;

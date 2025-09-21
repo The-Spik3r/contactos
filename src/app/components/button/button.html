@@ -1,0 +1,21 @@
+<div class="button-container" [ngClass]="'size-' + size">
+  <!-- Línea superior -->
+  <div class="line line-top"></div>
+
+  <!-- Botón principal -->
+  <div
+    class="quest-button"
+    [class.pressed]="isPressed"
+    (click)="onClick()"
+    (keydown)="onKeydown($event)"
+    tabindex="0"
+  >
+    <div class="button-content">
+      <div class="icon"></div>
+      <span class="text">{{ text }}</span>
+    </div>
+  </div>
+
+  <!-- Línea inferior -->
+  <div class="line line-bottom"></div>
+</div>
