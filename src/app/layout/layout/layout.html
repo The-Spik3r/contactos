@@ -3,32 +3,57 @@
     <header>
       <div class="header-buttons">
         <div>
-          <app-button text="Contacts" size="large"></app-button>
+          <app-button
+            text="Contacts"
+            size="large"
+            [isRouterLink]="true"
+            routerLink="/contacts"
+            (buttonClicked)="onButtonClick($event)"
+          ></app-button>
         </div>
         <div>
-          <app-button text="Create" size="large"></app-button>
+          <app-button
+            text="Create"
+            size="large"
+            [isRouterLink]="true"
+            routerLink="/create"
+            (buttonClicked)="onButtonClick($event)"
+          ></app-button>
         </div>
         <div>
-          <app-button text="Update" size="large"></app-button>
+          <app-button
+            text="Groups"
+            size="large"
+            [isRouterLink]="true"
+            routerLink="/groups"
+            (buttonClicked)="onButtonClick($event)"
+          ></app-button>
         </div>
         <div>
-          <app-button text="Delete" size="large"></app-button>
+          <app-button
+            text="System"
+            size="large"
+            [isRouterLink]="true"
+            routerLink="/system"
+            (buttonClicked)="onButtonClick($event)"
+          ></app-button>
+        </div>
+      </div>
+      <div class="header-line">
+        <div class="header-line-unique"></div>
+        <div class="header-line-items">
+          @for (item of items; track $index) {
+          <div class="header-line-segment"></div>
+          }
         </div>
       </div>
     </header>
-    <div class="header-line">
-      <div class="header-line-unique"></div>
-      <div class="header-line-items">
-        @for (item of items; track $index) {
-        <div class="header-line-segment"></div>
-        }
-      </div>
-    </div>
+
     <router-outlet></router-outlet>
 
     <div class="help-menu">
       <div class="help-menu-line-vertical"></div>
-      <div class="help-menu-text">hola necesitas ayuda</div>
+      <div class="help-menu-text">{{ message }}</div>
     </div>
   </div>
 </div>

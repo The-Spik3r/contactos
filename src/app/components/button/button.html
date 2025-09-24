@@ -18,4 +18,10 @@
 
   <!-- Línea inferior -->
   <div class="line line-bottom"></div>
+
+  <!-- Block router con animación de caída -->
+  <div
+    class="block-router-container"
+    [ngClass]="isRouterLink && isPressed ? 'block-router' : 'block-router-hidden'"
+  ></div>
 </div>
