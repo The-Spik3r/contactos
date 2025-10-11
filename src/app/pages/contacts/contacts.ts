@@ -1,13 +1,20 @@
-import { Component } from '@angular/core';
-import { Card } from "../../components/card/card";
-import { Button } from "../../components/button/button";
-
+import { Component, inject, OnInit } from '@angular/core';
+import { Button } from '../../components/button/button';
+import { Contact } from '../../services/contact';
+import { HelpMenu } from '../../services/help-menu';
+import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-contacts',
-  imports: [Card, Button],
+  imports: [Button, RouterOutlet],
   templateUrl: './contacts.html',
-  styleUrl: './contacts.scss'
+  styleUrl: './contacts.scss',
 })
-export class Contacts {
+export class Contacts  implements OnInit {
+  contactService = inject(Contact);
+  helpmenu = inject(HelpMenu);
+
+  ngOnInit() {
+    this.helpmenu.messages = "Manage your contacts easily and efficiently.";
+  }
 
 }

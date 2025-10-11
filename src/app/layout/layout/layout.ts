@@ -12,7 +12,6 @@ import { Location } from '@angular/common';
 })
 export class Layout {
   helpMenuService = inject(HelpMenu);
-  message: string = this.helpMenuService.getMessage('default');
   items = ['', '', '', '', '', '', '', '', '', ''];
 
   @ViewChildren(Button) buttons!: QueryList<Button>;
@@ -20,17 +19,14 @@ export class Layout {
   constructor(private location: Location) {}
 
   ngOnInit() {
-    console.log(this.location.path().replace('/', ''));
-    this.message = this.helpMenuService.getMessage(
-      this.location.path().replace('/', '') || 'default'
-    );
+    this.helpMenuService.messages = 'Configure application settings and preferences.';
   }
 
   onButtonClick(clickedRoute: string) {
     // Resetear todos los botones
     this.buttons.forEach((button) => {
       if (button.isRouterLink) {
-        button.reset();
+        button;
       }
     });
 
@@ -38,7 +34,7 @@ export class Layout {
     setTimeout(() => {
       this.buttons.forEach((button) => {
         if (button.isRouterLink && button.routerLink === clickedRoute) {
-          button.activate();
+          button;
         }
       });
     }, 0);

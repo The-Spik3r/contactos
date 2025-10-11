@@ -7,7 +7,8 @@
             text="Contacts"
             size="large"
             [isRouterLink]="true"
-            routerLink="/contacts"
+            [routerLink]="'/contacts'"
+            [exact]="false"
             (buttonClicked)="onButtonClick($event)"
           ></app-button>
         </div>
@@ -16,7 +17,8 @@
             text="Create"
             size="large"
             [isRouterLink]="true"
-            routerLink="/create"
+            [routerLink]="'/create'"
+            [exact]="true"
             (buttonClicked)="onButtonClick($event)"
           ></app-button>
         </div>
@@ -25,7 +27,8 @@
             text="Groups"
             size="large"
             [isRouterLink]="true"
-            routerLink="/groups"
+            [routerLink]="'/groups'"
+            [exact]="true"
             (buttonClicked)="onButtonClick($event)"
           ></app-button>
         </div>
@@ -34,7 +37,8 @@
             text="System"
             size="large"
             [isRouterLink]="true"
-            routerLink="/system"
+            [routerLink]="'/system'"
+            [exact]="true"
             (buttonClicked)="onButtonClick($event)"
           ></app-button>
         </div>
@@ -53,7 +57,7 @@
 
     <div class="help-menu">
       <div class="help-menu-line-vertical"></div>
-      <div class="help-menu-text">{{ message }}</div>
+      <div class="help-menu-text">{{ helpMenuService.messages }}</div>
     </div>
   </div>
 </div>

@@ -1,0 +1,74 @@
+<div>
+  <div class="flex gap-64">
+    <app-card title="Contact Detail {{ id() }}">
+      <div body class="contact-detail-body font-lg">
+        <div class="contact-detail-photo"></div>
+        <app-separator orientation="horizontal"></app-separator>
+        <div class="flex justify-between items-center">
+          <p>First Name:</p>
+          <p>{{ contactDetail?.firstName }}</p>
+        </div>
+        <div>
+          <p>{{ contactDetail?.description || 'No description available' }}</p>
+        </div>
+      </div>
+    </app-card>
+    <app-card title="Contact Detail {{ id() }}">
+      <div body class="contact-detail-body font-lg">
+        <div class="flex justify-between items-center">
+          <p>{{ contactDetail?.firstName }}</p>
+          <p>Lv : {{ (contactDetail?.id || 0) + 100 }}</p>
+        </div>
+        <app-separator orientation="horizontal"></app-separator>
+        <div class="flex justify-between items-center">
+          <p>Lastname :</p>
+          <p>{{ contactDetail?.lastName }}</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p>Company :</p>
+          <p>{{ contactDetail?.company || 'N/A' }}</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p>HP :</p>
+          <p>800 / 800</p>
+        </div>
+        <app-separator orientation="horizontal"></app-separator>
+        <div class="flex justify-between items-center">
+          <p>Email :</p>
+          <p>
+            {{ contactDetail?.email }}
+          </p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p>Address :</p>
+          <p>
+            {{ contactDetail?.address || 'N/A' }}
+          </p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p>Is Favorite :</p>
+          <p>{{ contactDetail?.isFavorite ? 'Yes' : 'No' }}</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <div class="cuad"></div>
+          <div class="cuad"></div>
+          <div class="cuad"></div>
+          <div class="cuad"></div>
+          <div class="cuad"></div>
+          <div class="cuad"></div>
+          <div class="cuad"></div>
+          <div class="cuad"></div>
+          <div class="cuad"></div>
+          <div class="cuad"></div>
+          <div class="cuad"></div>
+          <div class="cuad"></div>
+        </div>
+        <app-separator orientation="horizontal"></app-separator>
+        <div class="w-full flex justify-center items-center p-30">
+          <p>NO ERROR</p>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div></div>
+</div>

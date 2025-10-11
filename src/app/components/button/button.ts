@@ -1,64 +1,83 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+  inject,
+  effect,
+} from '@angular/core';
 import { NgClass } from '@angular/common';
-import { Router } from '@angular/router';
+import { RouterLink, Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-button',
-  imports: [NgClass],
+  imports: [NgClass, RouterLink],
   templateUrl: './button.html',
   styleUrl: './button.scss',
 })
-export class Button implements OnInit {
+export class Button implements OnInit, OnChanges {
   @Input() text: string = 'QUESTS';
   @Input() size: 'small' | 'medium' | 'large' = 'medium';
   @Input() isRouterLink: boolean = false;
   @Input() routerLink: string = '/';
+  @Input() exact: boolean = false; 
+  @Input() disableActiveState: boolean = false;
   @Output() buttonClicked = new EventEmitter<string>();
 
   isPressed = false;
+  isRouteActive = false;
+  private router = inject(Router);
 
-  constructor(private router: Router) {}
+  constructor() {
+    // Effect para detectar cambios de ruta
+    effect(() => {
+      this.checkRouteActive();
+    });
+  }
 
   ngOnInit() {
-    // Verificar la ruta inicial si es un router link
     if (this.isRouterLink) {
-      this.checkActiveRoute();
+      // Suscribirse a eventos de navegación
+      this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+        this.checkRouteActive();
+      });
+
+      // Verificar ruta inicial
+      this.checkRouteActive();
     }
   }
 
-  private checkActiveRoute() {
-    if (this.isRouterLink && this.routerLink) {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['routerLink'] || changes['exact']) {
+      this.checkRouteActive();
+    }
+  }
+
+  private checkRouteActive() {
+    if (this.isRouterLink && this.routerLink && !this.disableActiveState) {
       const currentUrl = this.router.url;
-      // Verificar si la URL actual coincide o empieza con la ruta del botón
-      this.isPressed =
-        currentUrl === this.routerLink || currentUrl.startsWith(this.routerLink + '/');
-    }
-  }
 
-  // Método público para resetear el estado
-  reset() {
-    if (this.isRouterLink) {
-      this.isPressed = false;
-    }
-  }
-
-  // Método público para activar
-  activate() {
-    if (this.isRouterLink) {
-      this.isPressed = true;
+      if (this.exact) {
+        this.isRouteActive = currentUrl === this.routerLink;
+      } else {
+        this.isRouteActive = currentUrl.startsWith(this.routerLink);
+      }
+    } else {
+      this.isRouteActive = false;
     }
   }
 
   onClick() {
-    if (this.isRouterLink && this.routerLink) {
-      // Emitir evento para que el padre maneje el estado
-      this.buttonClicked.emit(this.routerLink);
-      this.router.navigate([this.routerLink]);
-    } else {
-      // Para botones que no son router links
+    if (!this.isRouterLink) {
       this.isPressed = !this.isPressed;
+      this.buttonClicked.emit(this.text);
     }
   }
+
   onKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();

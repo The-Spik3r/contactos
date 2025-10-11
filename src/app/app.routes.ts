@@ -6,6 +6,7 @@ import { Create } from './pages/create/create';
 import { onlyPublicGuard } from './guards/only-public-guard';
 import { onlyUsersGuard } from './guards/only-users-guard';
 import { System } from './pages/system/system';
+import { ContactsDetail } from './pages/contacts-detail/contacts-detail';
 export const routes: Routes = [
   {
     path: '',
@@ -15,6 +16,12 @@ export const routes: Routes = [
       {
         path: 'contacts',
         component: Contacts,
+        children: [
+          {
+            path: ':id',
+            component: ContactsDetail,
+          },
+        ],
       },
       {
         path: 'create',

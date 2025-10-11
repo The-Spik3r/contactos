@@ -95,8 +95,8 @@ export class Login implements OnInit {
     // Simular un pequeño delay para mostrar el estado de procesamiento
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    this.authService.signIn(this.email, this.password);
-    if (this.authService.isloggedin) {
+    const res = await this.authService.signIn(this.email, this.password);
+    if (res) {
       this.router.navigate(['/contacts']);
     } else {
       this.isError = true;

@@ -5,7 +5,8 @@
   <!-- Botón principal -->
   <div
     class="quest-button"
-    [class.pressed]="isPressed"
+    [class.pressed]="isRouterLink ? isRouteActive : isPressed"
+    [routerLink]="isRouterLink ? routerLink : null"
     (click)="onClick()"
     (keydown)="onKeydown($event)"
     tabindex="0"
@@ -22,6 +23,9 @@
   <!-- Block router con animación de caída -->
   <div
     class="block-router-container"
-    [ngClass]="isRouterLink && isPressed ? 'block-router' : 'block-router-hidden'"
+    [ngClass]="[
+      isRouterLink ? 'with-router' : 'without-router',
+      isRouteActive ? 'block-router' : ''
+    ]"
   ></div>
 </div>

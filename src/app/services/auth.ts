@@ -20,8 +20,10 @@ export class Auth {
       this.isloggedin = true;
       this.token = await res.text();
       localStorage.setItem('token', this.token);
+      return true;
     } else {
       this.isloggedin = false;
+      return false;
     }
   }
 

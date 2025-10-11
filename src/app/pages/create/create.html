@@ -1,118 +1,16 @@
-<main class="create-container">
-  <div class="create-card">
-    <div class="create-header">
-      <h2>Crear Contacto</h2>
+<main class="contacts-container">
+  <div class="contacts-header">
+    <h1>Create</h1>
+  </div>
+  <div class="contacts-body">
+    <div class="scroll-container">
+      <div class="scroll-bar"></div>
+      <div class="scroll-secondary"></div>
     </div>
-    <form
-      class="create-form"
-      #createForm="ngForm"
-      (submit)="createSubmit({
-        name: name.value,
-        lastName: lastName.value,
-        email: email.value,
-        address: address.value,
-        phone: phone.value,
-        company: company.value,
-        description: description.value,
-        urlImage: urlImage.value,
-      }); $event.preventDefault()"
-    >
-      <div class="form-group">
-        <label for="nombre">Nombre</label>
-        <input
-          type="text"
-          id="name"
-          #name
-          name="name"
-          required
-          placeholder="Ingresa el nombre"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="apellido">Apellido</label>
-        <input
-          type="text"
-          id="lastName"
-          #lastName
-          name="lastName"
-          required
-          placeholder="Ingresa el apellido"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="email">Correo Electrónico</label>
-        <input
-          type="email"
-          id="email"
-          #email
-          name="email"
-          required
-          placeholder="Ingresa el correo electrónico"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="direccion">Dirección</label>
-        <input
-          type="text"
-          id="address"
-          name="address"
-          #address
-          required
-          placeholder="Ingresa la dirección"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="telefono">Teléfono</label>
-        <input
-          type="tel"
-          id="phone"
-          name="phone"
-          #phone
-          required
-          placeholder="Ingresa el teléfono"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="compania">Compañía</label>
-        <input
-          type="text"
-          id="company"
-          name="company"
-          #company
-          required
-          placeholder="Ingresa la compañía"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="descripcion">Descripción</label>
-        <textarea
-          id="description"
-          name="description"
-          #description
-          required
-          placeholder="Ingresa una descripción"
-        ></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="urlImage">URL de Imagen</label>
-        <input
-          type="url"
-          id="urlImage"
-          name="urlImage"
-          #urlImage
-          required
-          placeholder="Ingresa la URL de la imagen"
-        />
-      </div>
-
-      <button type="submit" class="create-button">Crear Contacto</button>
-    </form>
+    <div class="">
+      <app-button class="add-contact-button">
+        <span class="material-symbols-outlined">person_add</span>
+      </app-button>
+    </div>
   </div>
 </main>

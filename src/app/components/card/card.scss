@@ -1,8 +1,10 @@
 .card-container {
   background-color: var(--third-color);
-  min-width: 300px;
+  min-width: 600px;
 }
 .card-header {
+  font-size: 1.4rem;
+  padding: 10px;
   background-color: var(--secondary-color);
   color: var(--primary-color);
 }

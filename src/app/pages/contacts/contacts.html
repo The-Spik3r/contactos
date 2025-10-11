@@ -8,9 +8,18 @@
       <div class="scroll-secondary"></div>
     </div>
     <div class="">
-      <app-button class="add-contact-button">
-        <span class="material-symbols-outlined">person_add</span>
+      @for (contact of contactService.contacts; track $index) {
+      <app-button
+        class="add-contact-button"
+        [text]="contact.firstName"
+        [isRouterLink]="true"
+        [routerLink]="'/contacts/' + contact.id"
+        [exact]="false"
+        [disableActiveState]="false"
+      >
       </app-button>
+      }
     </div>
+    <router-outlet></router-outlet>
   </div>
 </main>

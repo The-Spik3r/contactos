@@ -135,6 +135,7 @@ table {
   --third-color: #dad4bb;
   --fourth-color: #d9d3ba;
   --five-color: #94917f;
+  --six-color: #b4af9a;
   --text-color: #4f4c43;
 }
 
@@ -216,4 +217,257 @@ body {
 * {
   scrollbar-width: thin;
   scrollbar-color: #181510 rgba(209, 205, 183, 0.1);
+}
+
+// aca voy a meter clases basicas que uso en tailwind porque me fiaca crear una clase solo para meter un flex direction column o un gap
+
+.gap-1 {
+  gap: 1px;
+}
+.gap-2 {
+  gap: 2px;
+}
+.gap-3 {
+  gap: 3px;
+}
+.gap-4 {
+  gap: 4px;
+}
+.gap-5 {
+  gap: 5px;
+}
+.gap-6 {
+  gap: 6px;
+}
+.gap-8 {
+  gap: 8px;
+}
+.gap-10 {
+  gap: 10px;
+}
+.gap-12 {
+  gap: 12px;
+}
+.gap-15 {
+  gap: 15px;
+}
+.gap-16 {
+  gap: 16px;
+}
+.gap-18 {
+  gap: 18px;
+}
+.gap-20 {
+  gap: 20px;
+}
+.gap-24 {
+  gap: 24px;
+}
+.gap-25 {
+  gap: 25px;
+}
+.gap-30 {
+  gap: 30px;
+}
+.gap-32 {
+  gap: 32px;
+}
+.gap-36 {
+  gap: 36px;
+}
+.gap-40 {
+  gap: 40px;
+}
+.gap-48 {
+  gap: 48px;
+}
+.gap-50 {
+  gap: 50px;
+}
+.gap-64 {
+  gap: 64px;
+}
+
+.flex {
+  display: flex;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.w-full {
+  width: 100%;
+}
+.w-50 {
+  width: 50%;
+}
+.w-25 {
+  width: 25%;
+}
+.w-75 {
+  width: 75%;
+}
+
+.h-full {
+  height: 100%;
+}
+.h-2 {
+  height: 2px;
+}
+.h-5 {
+  height: 5px;
+}
+.h-10 {
+  height: 10px;
+}
+.h-50 {
+  height: 50%;
+}
+.h-25 {
+  height: 25%;
+}
+.h-75 {
+  height: 75%;
+}
+
+.justify-center {
+  justify-content: center;
+}
+.justify-start {
+  justify-content: flex-start;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.justify-around {
+  justify-content: space-around;
+}
+
+.items-center {
+  align-items: center;
+}
+.items-start {
+  align-items: flex-start;
+}
+.items-end {
+  align-items: flex-end;
+}
+.items-stretch {
+  align-items: stretch;
+}
+
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+
+.m-0 {
+  margin: 0;
+}
+.m-10 {
+  margin: 10px;
+}
+.m-20 {
+  margin: 20px;
+}
+
+.p-0 {
+  padding: 0;
+}
+.p-10 {
+  padding: 10px;
+}
+.p-20 {
+  padding: 20px;
+}
+.p-25{
+  padding: 25px;
+}
+.p-30 {
+  padding: 30px;
+}
+.p-35{
+  padding: 35px;
+}
+.p-40 {
+  padding: 40px;
+}
+
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
+.fixed {
+  position: fixed;
+}
+
+.hidden {
+  display: none;
+}
+.block {
+  display: block;
+}
+.inline {
+  display: inline;
+}
+.inline-block {
+  display: inline-block;
+}
+
+.bg-primary {
+  background-color: var(--primary-color);
+}
+.bg-secondary {
+  background-color: var(--secondary-color);
+}
+
+.bg-third {
+  background-color: var(--third-color);
+}
+.bg-fourth {
+  background-color: var(--fourth-color);
+}
+.bg-five {
+  background-color: var(--five-color);
+}
+.bg-six {
+  background-color: var(--six-color);
+}
+
+.font-3xl{
+  font-size: 3rem;
+}
+
+.font-2xl {
+  font-size: 2rem;
+}
+.font-xl {
+  font-size: 1.5rem;
+}
+.font-lg {
+  font-size: 1.25rem;
+}
+.font-md {
+  font-size: 1rem;
+}
+.font-sm {
+  font-size: 0.875rem;
 }

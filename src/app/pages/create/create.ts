@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Contact } from '../../services/contact';
+import { Button } from "../../components/button/button";
 
 interface ContactForm {
   name: string;
@@ -15,7 +16,7 @@ interface ContactForm {
 
 @Component({
   selector: 'app-create',
-  imports: [FormsModule],
+  imports: [FormsModule, Button],
 
   templateUrl: './create.html',
   styleUrl: './create.scss',
@@ -24,6 +25,6 @@ export class Create {
   ContactService = inject(Contact)
   createSubmit(contact: ContactForm) {
     console.log(contact);
-    this.ContactService.createContact(contact);
+    // this.ContactService.createContact(contact);
   }
 }
