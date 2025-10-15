@@ -23,9 +23,8 @@
   </div>
   } @if (gonnaLogin) {
   <div class="messages-boots">
-    <p>Please enter your credentials</p>
+    <p>{{ isSignUpMode ? 'Create new account' : 'Please enter your credentials' }}</p>
 
-    <!-- Mostrar prompt de email -->
     @if (loginStep === 'email') {
     <div class="terminal-input-container">
       <span class="terminal-prompt">Email: </span>
@@ -39,14 +38,70 @@
         autofocus
       />
     </div>
+    <div class="terminal-actions">
+      <button (click)="toggleSignUpMode()" class="toggle-mode-btn">
+        {{ isSignUpMode ? '← Back to Login' : 'Create Account →' }}
+      </button>
+    </div>
     }
 
-    <!-- Mostrar email confirmado y prompt de password -->
+    @if (loginStep === 'firstName') {
+    <div class="terminal-history">
+      <span class="terminal-prompt">Email: </span>
+      <span class="terminal-value">{{ email }}</span>
+    </div>
+    <div class="terminal-input-container">
+      <span class="terminal-prompt">First Name: </span>
+      <input
+        type="text"
+        #firstNameInput
+        [(ngModel)]="firstName"
+        (keydown.enter)="onFirstNameSubmit()"
+        class="terminal-input"
+        placeholder="John"
+        autofocus
+      />
+    </div>
+    }
+
+    @if (loginStep === 'lastName') {
+    <div class="terminal-history">
+      <span class="terminal-prompt">Email: </span>
+      <span class="terminal-value">{{ email }}</span>
+    </div>
+    <div class="terminal-history">
+      <span class="terminal-prompt">First Name: </span>
+      <span class="terminal-value">{{ firstName }}</span>
+    </div>
+    <div class="terminal-input-container">
+      <span class="terminal-prompt">Last Name: </span>
+      <input
+        type="text"
+        #lastNameInput
+        [(ngModel)]="lastName"
+        (keydown.enter)="onLastNameSubmit()"
+        class="terminal-input"
+        placeholder="Doe"
+        autofocus
+      />
+    </div>
+    }
+
     @if (loginStep === 'password') {
     <div class="terminal-history">
       <span class="terminal-prompt">Email: </span>
       <span class="terminal-value">{{ email }}</span>
     </div>
+    @if (isSignUpMode) {
+    <div class="terminal-history">
+      <span class="terminal-prompt">First Name: </span>
+      <span class="terminal-value">{{ firstName }}</span>
+    </div>
+    <div class="terminal-history">
+      <span class="terminal-prompt">Last Name: </span>
+      <span class="terminal-value">{{ lastName }}</span>
+    </div>
+    }
     <div class="terminal-input-container">
       <span class="terminal-prompt">Password: </span>
       <input
@@ -61,7 +116,6 @@
     </div>
     }
 
-    <!-- Mostrar ambos valores y procesar login -->
     @if (loginStep === 'processing') {
     <div class="terminal-history">
       <span class="terminal-prompt">Email: </span>
@@ -76,7 +130,50 @@
     </div>
     }
 
-    <!-- Mostrar error si falla la autenticación -->
+    @if (loginStep === 'signup-processing') {
+    <div class="terminal-history">
+      <span class="terminal-prompt">Email: </span>
+      <span class="terminal-value">{{ email }}</span>
+    </div>
+    <div class="terminal-history">
+      <span class="terminal-prompt">First Name: </span>
+      <span class="terminal-value">{{ firstName }}</span>
+    </div>
+    <div class="terminal-history">
+      <span class="terminal-prompt">Last Name: </span>
+      <span class="terminal-value">{{ lastName }}</span>
+    </div>
+    <div class="terminal-history">
+      <span class="terminal-prompt">Password: </span>
+      <span class="terminal-value">••••••••</span>
+    </div>
+    <div class="terminal-processing">
+      <p>Creating account...</p>
+    </div>
+    }
+
+    @if (loginStep === 'signup-success') {
+    <div class="terminal-history">
+      <span class="terminal-prompt">Email: </span>
+      <span class="terminal-value">{{ email }}</span>
+    </div>
+    <div class="terminal-history">
+      <span class="terminal-prompt">First Name: </span>
+      <span class="terminal-value">{{ firstName }}</span>
+    </div>
+    <div class="terminal-history">
+      <span class="terminal-prompt">Last Name: </span>
+      <span class="terminal-value">{{ lastName }}</span>
+    </div>
+    <div class="terminal-history">
+      <span class="terminal-prompt">Password: </span>
+      <span class="terminal-value">••••••••</span>
+    </div>
+    <div class="terminal-success">
+      <p class="success">✓ Account created successfully! Redirecting to login...</p>
+    </div>
+    }
+
     @if (loginStep === 'error') {
     <div class="terminal-history">
       <span class="terminal-prompt">Email: </span>
@@ -87,7 +184,13 @@
       <span class="terminal-value">••••••••</span>
     </div>
     <div class="terminal-error">
-      <p class="error">Authentication failed. Please try again.</p>
+      <p class="error">
+        {{
+          isSignUpMode
+            ? 'Registration failed. Please try again.'
+            : 'Authentication failed. Please try again.'
+        }}
+      </p>
     </div>
     <div class="terminal-input-container">
       <span class="terminal-prompt">Email: </span>

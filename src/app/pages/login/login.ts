@@ -13,10 +13,22 @@ import { Loader } from '../../components/loader/loader';
 export class Login implements OnInit {
   email: string = '';
   password: string = '';
+  firstName: string = '';
+  lastName: string = '';
   loged: boolean = false;
   isError: boolean = false;
   gonnaLogin: boolean = false;
-  loginStep: 'email' | 'password' | 'processing' | 'error' = 'email';
+  loginStep:
+    | 'email'
+    | 'firstName'
+    | 'lastName'
+    | 'password'
+    | 'processing'
+    | 'error'
+    | 'signup'
+    | 'signup-processing'
+    | 'signup-success' = 'email';
+  isSignUpMode: boolean = false;
   messages: { [key: string]: string[] } = {
     messageSeems: [
       'Commencing System Check',
@@ -80,14 +92,77 @@ export class Login implements OnInit {
 
   onEmailSubmit() {
     if (this.email.trim()) {
+      if (this.isSignUpMode) {
+        this.loginStep = 'firstName';
+      } else {
+        this.loginStep = 'password';
+      }
+    }
+  }
+
+  onFirstNameSubmit() {
+    if (this.firstName.trim()) {
+      this.loginStep = 'lastName';
+    }
+  }
+
+  onLastNameSubmit() {
+    if (this.lastName.trim()) {
       this.loginStep = 'password';
     }
   }
 
   onPasswordSubmit() {
     if (this.password.trim()) {
-      this.loginStep = 'processing';
-      this.processLogin();
+      if (this.isSignUpMode) {
+        this.loginStep = 'signup-processing';
+        this.processSignUp();
+      } else {
+        this.loginStep = 'processing';
+        this.processLogin();
+      }
+    }
+  }
+
+  toggleSignUpMode() {
+    this.isSignUpMode = !this.isSignUpMode;
+    this.email = '';
+    this.password = '';
+    this.firstName = '';
+    this.lastName = '';
+    this.loginStep = 'email';
+  }
+
+  async processSignUp() {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    const res = await this.authService.signUp(
+      this.firstName,
+      this.lastName,
+      this.email,
+      this.password
+    );
+    if (res.success) {
+      this.loginStep = 'signup-success';
+      setTimeout(() => {
+        this.isSignUpMode = false;
+        this.email = '';
+        this.password = '';
+        this.firstName = '';
+        this.lastName = '';
+        this.loginStep = 'email';
+      }, 3000);
+    } else {
+      this.isError = true;
+      this.loginStep = 'error';
+      this.email = '';
+      this.password = '';
+      this.firstName = '';
+      this.lastName = '';
+
+      setTimeout(() => {
+        this.loginStep = 'email';
+      }, 2000);
     }
   }
 

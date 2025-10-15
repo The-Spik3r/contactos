@@ -87,6 +87,23 @@ export class Auth implements OnInit {
     }
   }
 
+  async signUp(firstName: string, lastName: string, email: string, password: string) {
+    const res = await fetch(`${this.baseUrl}/Users`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ firstName, lastName, email, password }),
+    });
+
+    if (res.ok) {
+      return { success: true, message: 'User created successfully' };
+    } else {
+      const errorText = await res.text();
+      return { success: false, message: errorText || 'Registration failed' };
+    }
+  }
+
   signOut() {
     this.isloggedin = false;
     this.tokenValidated = false;

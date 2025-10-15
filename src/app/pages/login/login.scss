@@ -263,6 +263,60 @@
     }
   }
 }
+
+.terminal-success {
+  margin: 1rem 0;
+  font-family: 'Courier New', monospace;
+
+  p {
+    font-size: 1.2rem;
+    color: #00ff00;
+    text-shadow: 0 0 3px rgba(0, 255, 0, 0.4), 0 0 6px rgba(0, 255, 0, 0.2);
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid rgba(0, 255, 0, 0.7);
+    animation: typewriter 1.5s steps(40, end) forwards, blink-cursor 1s infinite;
+    width: 0;
+    max-width: none;
+    text-overflow: clip;
+
+    &.typed {
+      border-right: none;
+      width: auto;
+      animation: none;
+      max-width: 100%;
+    }
+  }
+}
+
+.terminal-actions {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+
+  .toggle-mode-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+
 // Animación sutil de parpadeo para simular monitor CRT
 @keyframes subtleFlicker {
   0%,
