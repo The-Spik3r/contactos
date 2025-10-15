@@ -8,7 +8,12 @@
           <p>First Name:</p>
           <p>{{ contactDetail?.firstName }}</p>
         </div>
-        <div>
+        <div class="flex justify-between items-center">
+          <p>Number:</p>
+          <p>{{ contactDetail?.number || 'No number available' }}</p>
+        </div>
+        <app-separator orientation="horizontal"></app-separator>
+        <div class="p-10 flex justify-center items-center">
           <p>{{ contactDetail?.description || 'No description available' }}</p>
         </div>
       </div>

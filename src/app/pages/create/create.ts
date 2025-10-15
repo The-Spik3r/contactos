@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Contact } from '../../services/contact';
 import { Button } from "../../components/button/button";
-
+import { RouterOutlet } from '@angular/router';
 interface ContactForm {
   name: string;
   lastName: string;
@@ -16,7 +16,7 @@ interface ContactForm {
 
 @Component({
   selector: 'app-create',
-  imports: [FormsModule, Button],
+  imports: [FormsModule, Button, RouterOutlet],
 
   templateUrl: './create.html',
   styleUrl: './create.scss',

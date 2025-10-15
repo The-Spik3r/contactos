@@ -7,6 +7,8 @@ import { onlyPublicGuard } from './guards/only-public-guard';
 import { onlyUsersGuard } from './guards/only-users-guard';
 import { System } from './pages/system/system';
 import { ContactsDetail } from './pages/contacts-detail/contacts-detail';
+import { ContactNew } from './pages/contact-new/contact-new';
+import { ContactUpdate } from './pages/contact-update/contact-update';
 export const routes: Routes = [
   {
     path: '',
@@ -26,6 +28,22 @@ export const routes: Routes = [
       {
         path: 'create',
         component: Create,
+        children: [
+          {
+            path: 'new',
+            component: ContactNew,
+          },
+          {
+            path: 'update',
+            component: ContactUpdate,
+            children: [
+              {
+                path: ':id',
+                component: ContactNew,
+              },
+            ],
+          },
+        ],
       },
       {
         path: 'system',

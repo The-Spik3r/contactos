@@ -1,0 +1,105 @@
+<div>
+  <div class="flex gap-64">
+    <app-card [title]="isEditMode ? 'Editar Contacto #' + id() : 'Nuevo Contacto'">
+      <div body class="contact-detail-body font-lg">
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+          <div>
+            <div class="form-group">
+              <label for="firstName">Nombre:</label>
+              <input
+                type="text"
+                id="firstName"
+                formControlName="firstName"
+                class="form-input"
+                [class.error]="
+                  contactForm.get('firstName')?.invalid && contactForm.get('firstName')?.touched
+                "
+              />
+              @if (contactForm.get('firstName')?.invalid && contactForm.get('firstName')?.touched) {
+              <div class="error-message">El nombre es requerido</div>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="lastName">Apellido:</label>
+              <input
+                type="text"
+                id="lastName"
+                formControlName="lastName"
+                class="form-input"
+                [class.error]="
+                  contactForm.get('lastName')?.invalid && contactForm.get('lastName')?.touched
+                "
+              />
+              @if (contactForm.get('lastName')?.invalid && contactForm.get('lastName')?.touched) {
+              <div class="error-message">El apellido es requerido</div>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                formControlName="email"
+                class="form-input"
+                [class.error]="
+                  contactForm.get('email')?.invalid && contactForm.get('email')?.touched
+                "
+              />
+              @if (contactForm.get('email')?.invalid && contactForm.get('email')?.touched) {
+              <div class="error-message">Email válido es requerido</div>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="number">Teléfono:</label>
+              <input
+                type="tel"
+                id="number"
+                formControlName="number"
+                class="form-input"
+                [class.error]="
+                  contactForm.get('number')?.invalid && contactForm.get('number')?.touched
+                "
+              />
+              @if (contactForm.get('number')?.invalid && contactForm.get('number')?.touched) {
+              <div class="error-message">El teléfono es requerido</div>
+              }
+            </div>
+          </div>
+          <div>
+            <div class="form-group">
+              <label for="address">Dirección:</label>
+              <input type="text" id="address" formControlName="address" class="form-input" />
+            </div>
+
+            <div class="form-group">
+              <label for="company">Compañía:</label>
+              <input type="text" id="company" formControlName="company" class="form-input" />
+            </div>
+
+            <div class="form-group">
+              <label for="description">Descripción:</label>
+              <textarea
+                id="description"
+                formControlName="description"
+                class="form-input"
+                rows="3"
+              ></textarea>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">
+                {{ isEditMode ? 'Actualizar' : 'Crear' }} Contacto
+              </button>
+              @if (isEditMode) {
+              <button type="button" class="btn btn-secondary" (click)="onDelete()">Eliminar</button>
+              }
+              <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </app-card>
+  </div>
+</div>

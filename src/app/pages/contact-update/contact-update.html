@@ -1,27 +1,21 @@
 <main class="contacts-container">
-  <div class="contacts-header">
-    <h1>Create</h1>
-  </div>
   <div class="contacts-body">
     <div class="scroll-container">
       <div class="scroll-bar"></div>
       <div class="scroll-secondary"></div>
     </div>
     <div class="">
+      @for (contact of contactService.contacts; track $index) {
       <app-button
         class="add-contact-button"
-        text="Add Contact"
+        [text]="contact.firstName"
         [isRouterLink]="true"
-        [routerLink]="'/create/new'"
+        [routerLink]="'/create/'+ 'update/' + contact.id"
+        [exact]="false"
+        [disableActiveState]="false"
       >
       </app-button>
-      <app-button
-        class="add-contact-button"
-        text="Edit Contact"
-        [isRouterLink]="true"
-        [routerLink]="'/create/update'"
-      >
-      </app-button>
+      }
     </div>
     <router-outlet></router-outlet>
   </div>
