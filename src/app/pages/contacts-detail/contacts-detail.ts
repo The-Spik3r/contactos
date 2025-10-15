@@ -30,10 +30,8 @@ export class ContactsDetail implements OnInit {
 
   async onSetFavorite() {
     if (this.contactDetail) {
-      const updatedContact = await this.contactService.setFavorite(this.contactDetail.id.toString());
-      if (updatedContact) {
-        await this.loadContact();
-      }
+      await this.contactService.setFavorite(this.contactDetail.id.toString());
+      await this.loadContact();
     }
   }
 }
