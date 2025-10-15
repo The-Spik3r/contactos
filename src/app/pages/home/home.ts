@@ -1,11 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { Auth } from '../../services/auth';
 import { Layout } from '../../layout/layout/layout';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, RouterOutlet, Layout],
+  imports: [RouterOutlet, Layout],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })

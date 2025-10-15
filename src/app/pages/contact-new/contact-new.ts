@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Contact } from '../../services/contact';
 import { Contact as IContact, NewContact } from '../../interface/Icontact';
 import { Card } from '../../components/card/card';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-contact-new',
   imports: [Card, ReactiveFormsModule],
@@ -81,42 +81,130 @@ export class ContactNew {
         await this.createContact(formData);
       }
     } catch (error) {
-      console.error('Error al guardar contacto:', error);
+      await Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        },
+      }).fire({
+        icon: 'error',
+        title: 'Error al procesar el contacto',
+      });
     }
   }
 
   private async createContact(data: NewContact) {
     const res = await this.contactService.createContact(data);
     if (res) {
-      alert('Contacto creado exitosamente');
+      await Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        },
+      }).fire({
+        icon: 'success',
+        title: 'Contacto creado exitosamente',
+      });
       this.router.navigate(['/contacts']);
     } else {
-      alert('Error al crear contacto');
+      await Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        },
+      }).fire({
+        icon: 'error',
+        title: 'Error al crear contacto',
+      });
     }
   }
 
   private async updateContact(data: IContact) {
     const res = await this.contactService.updateContact(data, this.id());
     if (res) {
-      alert('Contacto actualizado exitosamente');
+      await Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        },
+      }).fire({
+        icon: 'success',
+        title: 'Contacto actualizado exitosamente',
+      });
       this.router.navigate(['/contacts']);
     } else {
-      alert('Error al actualizar contacto');
+      await Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        },
+      }).fire({
+        icon: 'error',
+        title: 'Error al actualizar contacto',
+      });
     }
   }
 
   private async deleteContact() {
     const res = await this.contactService.deleteContact(this.id());
     if (res) {
-      alert('Contacto eliminado exitosamente');
       this.router.navigate(['/contacts']);
     } else {
-      alert('Error al eliminar contacto');
+      await Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        },
+      }).fire({
+        icon: 'error',
+        title: 'Error al eliminar contacto',
+      });
     }
   }
 
   async onDelete() {
-    await this.deleteContact();
+    await Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción no se puede deshacer.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.deleteContact();
+      }
+    });
   }
 
   onCancel() {
