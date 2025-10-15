@@ -27,4 +27,13 @@ export class ContactsDetail implements OnInit {
   private async loadContact() {
     this.contactDetail = await this.contactService.getContactById(this.id());
   }
+
+  async onSetFavorite() {
+    if (this.contactDetail) {
+      const updatedContact = await this.contactService.setFavorite(this.contactDetail.id.toString());
+      if (updatedContact) {
+        await this.loadContact();
+      }
+    }
+  }
 }

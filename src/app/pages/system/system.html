@@ -8,7 +8,13 @@
       <div class="scroll-secondary"></div>
     </div>
     <div class="">
-      <app-button class="add-contact-button" text="Log out" size="medium"> </app-button>
+      <app-button
+        class="add-contact-button"
+        text="Log out"
+        size="medium"
+        (buttonClicked)="onLogout()"
+      >
+      </app-button>
     </div>
   </div>
 </main>

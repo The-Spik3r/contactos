@@ -54,6 +54,12 @@
           <p>Is Favorite :</p>
           <p>{{ contactDetail?.isFavorite ? 'Yes' : 'No' }}</p>
         </div>
+        <div>
+          <p>Set favorite :</p>
+          <button (click)="onSetFavorite()">
+            {{ contactDetail?.isFavorite ? 'Unfavorite' : 'Favorite' }}
+          </button>
+        </div>
         <div class="flex justify-between items-center">
           <div class="cuad"></div>
           <div class="cuad"></div>

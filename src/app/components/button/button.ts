@@ -24,7 +24,7 @@ export class Button implements OnInit, OnChanges {
   @Input() size: 'small' | 'medium' | 'large' = 'medium';
   @Input() isRouterLink: boolean = false;
   @Input() routerLink: string = '/';
-  @Input() exact: boolean = false; 
+  @Input() exact: boolean = false;
   @Input() disableActiveState: boolean = false;
   @Output() buttonClicked = new EventEmitter<string>();
 
@@ -33,7 +33,6 @@ export class Button implements OnInit, OnChanges {
   private router = inject(Router);
 
   constructor() {
-    // Effect para detectar cambios de ruta
     effect(() => {
       this.checkRouteActive();
     });
@@ -41,7 +40,6 @@ export class Button implements OnInit, OnChanges {
 
   ngOnInit() {
     if (this.isRouterLink) {
-      // Suscribirse a eventos de navegación
       this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
         this.checkRouteActive();
       });

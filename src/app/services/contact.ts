@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Contact as IContact, NewContact } from '../interface/Icontact';
+import { Auth } from './auth';
 
 @Injectable({
   providedIn: 'root',
@@ -7,17 +8,21 @@ import { Contact as IContact, NewContact } from '../interface/Icontact';
 export class Contact {
   readonly _baseUrl = 'https://agenda-api.somee.com/api/contacts';
   contacts: IContact[] = [];
+  userService = inject(Auth);
   constructor() {
     this.getContact();
   }
 
   async getContact() {
+    const isAuthenticated = await this.userService.ensureAuthenticated();
+    if (!isAuthenticated) {
+      console.error('Usuario no autenticado');
+      return false;
+    }
+
     const res = await fetch(this._baseUrl, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
-      },
+      headers: await this.userService.getAuthHeaders(),
     });
 
     if (res.ok) {
@@ -32,12 +37,15 @@ export class Contact {
 
   async getContactById(id: string) {
     try {
+      const isAuthenticated = await this.userService.ensureAuthenticated();
+      if (!isAuthenticated) {
+        console.error('Usuario no autenticado');
+        return null;
+      }
+
       const res = await fetch(this._baseUrl + '/' + id, {
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
+        headers: await this.userService.getAuthHeaders(),
       });
       if (res.ok) {
         const response = await res.json();
@@ -51,12 +59,15 @@ export class Contact {
 
   async createContact(contact: NewContact) {
     try {
+      const isAuthenticated = await this.userService.ensureAuthenticated();
+      if (!isAuthenticated) {
+        console.error('Usuario no autenticado');
+        return false;
+      }
+
       const res = await fetch(this._baseUrl, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
+        headers: await this.userService.getAuthHeaders(),
         body: JSON.stringify(contact),
       });
 
@@ -70,12 +81,15 @@ export class Contact {
   }
   async updateContact(contact: IContact, id: string) {
     try {
+      const isAuthenticated = await this.userService.ensureAuthenticated();
+      if (!isAuthenticated) {
+        console.error('Usuario no autenticado');
+        return false;
+      }
+
       const res = await fetch(this._baseUrl + '/' + id, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
+        headers: await this.userService.getAuthHeaders(),
         body: JSON.stringify(contact),
       });
 
@@ -90,12 +104,11 @@ export class Contact {
 
   async deleteContact(id: string) {
     try {
+      const headers = await this.userService.getAuthHeaders(true);
+
       const res = await fetch(this._baseUrl + '/' + id, {
         method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
+        headers,
       });
 
       if (res.ok) {
@@ -103,6 +116,21 @@ export class Contact {
         return true;
       }
       return false;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+  async setFavorite(id: string) {
+    try {
+      const res = await fetch(this._baseUrl + '/' + id + '/favorite', {
+        method: 'POST',
+        headers: await this.userService.getAuthHeaders(),
+      });
+
+      const response = await res.json();
+      console.log(response);
+      return true;
     } catch (error) {
       console.error(error);
       return false;

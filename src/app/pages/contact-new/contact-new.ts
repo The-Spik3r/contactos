@@ -3,12 +3,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { Contact } from '../../services/contact';
 import { Contact as IContact, NewContact } from '../../interface/Icontact';
-import { Separator } from '../../components/separator/separator';
 import { Card } from '../../components/card/card';
 
 @Component({
   selector: 'app-contact-new',
-  imports: [Separator, Card, ReactiveFormsModule],
+  imports: [Card, ReactiveFormsModule],
   templateUrl: './contact-new.html',
   styleUrl: './contact-new.scss',
 })
