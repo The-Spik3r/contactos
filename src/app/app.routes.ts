@@ -9,10 +9,11 @@ import { System } from './pages/system/system';
 import { ContactsDetail } from './pages/contacts-detail/contacts-detail';
 import { ContactNew } from './pages/contact-new/contact-new';
 import { ContactUpdate } from './pages/contact-update/contact-update';
+import { Home } from './pages/home/home';
 export const routes: Routes = [
   {
     path: '',
-    component: Layout,
+    component: Home,
     canActivateChild: [onlyUsersGuard],
     children: [
       {
